@@ -3,5 +3,8 @@ composer.lock
 *.log
 /nbproject/private/
 public/static/uploadfile/*
+!public/static/uploadfile/100x100
+!public/static/uploadfile/400x400
+!public/static/uploadfile/800x800
 
 
