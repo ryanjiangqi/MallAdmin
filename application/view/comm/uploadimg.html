@@ -1,0 +1,58 @@
+{include file="../../view/comm/header" /}
+<link rel="stylesheet" href="/static/admin/css/checkbox.css" media="all">
+<link rel="stylesheet" href="/static/admin/css/upload.css">
+<style>
+    .x-body {
+        padding-top: 0px;
+    }
+</style>
+<div class="x-body">
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this" value="1">选择已有图片</li>
+            <li value="2">上传图片</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <ul class='se-img'>
+                    {volist name='list' id='data'}
+                    <li onclick="$.selectimage(this);" att="0" class="selectimges" value="{$data.filename}"><img src='/static/uploadfile/{$data.filename}'></li>
+                    {/volist}
+                </ul>
+                <div class="dataTables_paginate">
+                    {$list->render()}
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-input-block" style='background:#fff;height:100px;margin-left:0px;'>
+                    <div style="width:100px;position:relative">
+                        <section class="upload-section">
+                            <div class="upload-btn"></div>
+                            <input type="file" name="file" id="upload-input" value=""
+                                   accept="image/jpg,image/jpeg,image/png,image/bmp" multiple="multiple"/>
+                        </section>
+                    </div>
+                    <div class="image-box clear" style='margin-top: -100px;margin-left:110px;'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item select-image">
+        <button class="layui-btn" lay-submit="" lay-filter="add" onclick='$.save_image("{$parentid}","{$num}","{$name}");'>增加</button>
+    </div>
+
+</div>
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+<script src="/static/admin/lib/layer/layer.min.js"></script>
+<script src="/static/admin/operation/dealupload.js" charset="utf-8"></script>
+<script src="/static/admin/js/upload.js"></script>
+
+<script>
+    $.upload({
+        uploadurl: '{:url("base/base/uploadimage","","")}',
+    });
+</script>
+
+{include file="../../view/comm/footer" /}

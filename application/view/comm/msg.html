@@ -1,0 +1,13 @@
+{include file="../../view/comm/header" /}
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+<script>
+    parent.layer.msg('{$msg}', {icon: '{$iconum}', skin: 'layui-layer-default', time: '{$showtime}'});
+    if ('{$reload}') {
+        var t = setTimeout(function () {
+            window.parent.location.reload(true);
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }, 1000);
+    }
+</script>

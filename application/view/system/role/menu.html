@@ -1,0 +1,77 @@
+{include file="../../view/comm/header" /}
+<style>
+    .td-manage {
+        width: 30px;
+    }
+</style>
+<body>
+<div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a><cite>首页</cite></a>
+            <a><cite>系统设置</cite></a>
+            <a><cite>权限菜单</cite></a>
+        </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon"
+                                                                        style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <blockquote class="layui-elem-quote">权限菜单只能查看，如需添加新的权限菜单或修改权限菜单,请联系开发团队</blockquote>
+    <form class="layui-form x-center" action="">
+        <div class="layui-form-pane">
+            <div class="layui-form-item">
+                <label class="layui-form-label">顶级菜单</label>
+                <div class="layui-input-inline">
+                    <select name="parent_id">
+                        <option value="0">请选择</option>
+                        {volist name='parent' id='parent'}
+                        <option value="{$parent.id}" {if $parent.id eq $search.parent_id}selected{/if}>{$parent.menu_name}</option>
+                        {/volist}
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" name="menu_name" value="{$search.menu_name}" placeholder="菜单名称"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:80px">
+                    <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>菜单名称</th>
+            <th>父级菜单</th>
+            <th>菜单链接</th>
+            <th>状态</th>
+            <th>排序</th>
+            <th>添加时间</th>
+        </tr>
+        </thead>
+        <tbody id="x-link">
+
+        {volist name='list' id='data'}
+        <tr>
+            <td>{$data.menu_name}</td>
+            <td>{$data.parent_name}</td>
+            <td>{$data.url}</td>
+            <td>{$data.status}</td>
+            <td>{$data.sort}</td>
+            <td>{$data.create_on}</td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+
+    <div class="dataTables_paginate">
+        {$list->render()}
+    </div>
+</div>
+
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+{include file="../../view/comm/footer" /}

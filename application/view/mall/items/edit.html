@@ -1,0 +1,110 @@
+{include file="../../view/comm/header" /}
+<link rel="stylesheet" href="/static/admin/css/checkbox.css" media="all">
+<style>
+    .layui-form-item .layui-input-inline {
+        width: 280px;
+    }
+    .layui-form-pane .layui-form-checkbox{float:right;}
+    .price_type{color: #0d8ddb;font-size: 12px;}
+</style>
+<div class="x-body">
+    <form action="" method="post" class="layui-form layui-form-pane">
+        <input type='hidden' id='action' name='action' value='edit'>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">* </span>父级类目
+            </label>
+            <div class="layui-input-inline item">
+                <select name="parent_id">
+                    <option value="0">顶级类目</option>
+                    {volist name='parent_items' id='parent_items'}
+                    <option {if $parent_items.id eq $detail.parent_id}selected{/if} value="{$parent_items.id}">{$parent_items.items_name}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">* </span>类目名
+            </label>
+            <div class="layui-input-inline item">
+                <input type="text" id="name" name="name" required="" lay-verify="required"
+                       value="{$detail.items_name}" autocomplete="off" class="layui-input" placeholder="请输入类目名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                排序
+            </label>
+            <div class="layui-input-inline item">
+                <input type="text" id="sort" name="sort"
+                       autocomplete="off" class="layui-input" value="{$detail.sort}" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">状态</label>
+            <div class="layui-input-inline item">
+                <select name="status">
+                    <option value="发布" {if $detail.status eq '发布'}selected{/if}>发布</option>
+                    <option value="不发布" {if $detail.status eq '不发布'}selected{/if}>不发布</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">
+                选择类目需要的属性
+            </label>
+            <table class="layui-table layui-input-block">
+                <tbody>
+                {volist name='attribute' id='data'}
+                <tr>
+                    <td style="width: 200px;">
+                        {$data.attribute_value} <span class="price_type">({$data.price_type})</span>
+                        <input name="attribute_id[]" {$data.checked} type="checkbox" value="{$data.id}">
+                    </td>
+                    <td>
+                        <div class="layui-input-block">
+                            {volist name='data.child' id='child'}
+                            {$child.attribute_value}&nbsp;&nbsp;&nbsp;
+                            {/volist}
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">图片</label>
+            <div class="layui-input-inline item">
+                <div class="layui-btn" style='margin-left: 10px;' onclick="upload_image('{:url("base/base/uploadimageview","parentid=get-image&num=1&name=image","")}');"><i class="layui-icon">&#xe608;</i>添加图片
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <ul id="get-image" class="get-image">
+                {if $detail.image neq ''}
+                <li><img src="{$detail.image}"><span class="img-deleted" onclick="deletedImg(this);">
+                    <img src="/static/admin/images/delete.png" style="height: 20px;width: 20px;"></span>
+                    <input name="image" value="{$detail.image}" type="hidden">
+                </li>
+                {/if}
+            </ul>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                详情
+            </label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" id="desc" name="keyword" class="layui-textarea">{$detail.keyword}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" lay-filter="add">提交</button>
+        </div>
+    </form>
+</div>
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+{include file="../../view/comm/footer" /}

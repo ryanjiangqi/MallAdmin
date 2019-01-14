@@ -1,0 +1,138 @@
+{include file="../../view/comm/header" /}
+<div class="x-nav">
+    <span class="layui-breadcrumb">
+        <a><cite>首页</cite></a>
+        <a><cite>员工管理</cite></a>
+        <a><cite>考勤</cite></a>
+    </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon"
+                                                                        style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>今日打卡</legend>
+    </fieldset>
+    <form class="layui-form x-center" action="" onsubmit="attendance();return false;">
+
+        <div class="layui-form-pane">
+            <div class="layui-form-item">
+                <div class="layui-input-inline" style="width: 600px;">
+                    <div id="show" class="layui-btn" style="color:#fff;float: left;width: 160px;"></div>
+                    {if $attendance_exist eq ''}
+                    <div class="layui-input-inline" style="width: 120px;">
+                        <select name="att_type" id="att_type">
+                            <option value="请选择">请选择</option>
+                            <option value="早班">早班</option>
+                            <option value="中班">中班</option>
+                            <option value="晚班">晚班</option>
+                        </select>
+                    </div>
+                    <button class="layui-btn layui-btn-normal" style="float: left;">今日打卡</button>
+                    {else}
+                    <button class="layui-btn layui-btn-danger" style="float: left;">今日已打卡</button>
+                    {/if}
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>历史打卡记录</legend>
+    </fieldset>
+    <form class="layui-form x-center" action="">
+        <div class="layui-form-pane">
+            <div class="layui-form-item">
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-inline" style="width: 120px;">
+                    <select name="status">
+                        <option value="0">请选择</option>
+                        <option value="打卡成功" {if $search.status eq '打卡成功'}selected{/if}>打卡成功</option>
+                        <option value="迟到打卡" {if $search.status eq '迟到打卡'}selected{/if}>迟到打卡</option>
+                        <option value="病假" {if $search.status eq '病假'}selected{/if}>病假</option>
+                        <option value="事假" {if $search.status eq '事假'}selected{/if}>事假</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline" style="width: 300px;">
+                    <input type="text" name="content" value="{$search.content}" placeholder="员工号、用户名、真实姓名、手机" autocomplete="off"
+                           class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:80px">
+                    <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>员工号</th>
+            <th>员工用户名</th>
+            <th>员工姓名</th>
+            <th>考勤状态</th>
+            <th>打卡时间</th>
+            <th>请假天数</th>
+            <th>班次</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name='list' id='user'}
+        <tr>
+            <td>{$user.user_code}</td>
+            <td>{$user.username}</td>
+            <td>{$user.real_name}</td>
+            <td>{$user.status}</td>
+            <td>{$user.attenddance_date}</td>
+            <td>{$user.leave_date}</td>
+            <td>{$user.attendance_type}</td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+    <div class="dataTables_paginate">
+        {$list->render()}
+    </div>
+
+
+</div>
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+<script>
+    window.onload = function () {
+        var show = document.getElementById("show");
+        setInterval(function () {
+            var time = new Date();   // 程序计时的月从0开始取值后+1
+            var m = time.getMonth() + 1;
+            var t = time.getFullYear() + "-" + m + "-"
+                + time.getDate() + " " + time.getHours() + ":"
+                + time.getMinutes() + ":" + time.getSeconds();
+            show.innerHTML = t;
+        }, 1000);
+    };
+    function attendance() {
+        var attType=$("#att_type").val();
+        if(attType=='请选择'){
+            layer.msg('请选择班次', {icon: 3});
+            return false;
+        }
+        $.ajax({
+            url: "{:url('user/user/todayattendance','','')}",
+            type: 'Post',
+            dataType: 'Json',
+            beforeSend: function () {
+            },
+            data: {
+                att_type:attType
+            },
+            success: function (data) {
+                layer.msg('打卡成功!', {icon: 1, time: 1000}, function () {
+                    window.location.reload();
+                });
+            }
+        });
+    }
+</script>
+{include file="../../view/comm/footer" /}

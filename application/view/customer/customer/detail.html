@@ -1,0 +1,106 @@
+{include file="../../view/comm/header" /}
+<link rel="stylesheet" href="/static/admin/css/checkbox.css" media="all">
+<style>
+    .layui-form-item .layui-input-inline {
+        width: 280px;
+    }
+
+    .layui-table td, .layui-table th {
+        line-height: 18px;
+    }
+</style>
+<div class="x-body">
+    <form action="" method="post" class="layui-form layui-form-pane">
+
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                顾客基本信息
+            </label>
+            <div class="layui-input-block">
+                <table class="layui-table" style="padding: 0;margin: 0;">
+                    <tbody>
+                    <tr>
+                        <td>用户名：{$detail.user_name}</td>
+                        <td>昵称：{$detail.nick_name}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td>真实信息：{$detail.real_name}</td>
+                        <td>身份证号：{$detail.id_card}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td>电话：{$detail.mobile}</td>
+                        <td>邮箱：{$detail.email}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td>状态：{$detail.status}</td>
+                        <td>最近登录时间：{$detail.last_login}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                账户信息
+            </label>
+            <div class="layui-input-block">
+                <table class="layui-table" style="padding: 0;margin: 0;">
+                    <tbody>
+                    <tr>
+                        <td>账户余额：{$detail.account.amount}</td>
+
+                    </tr>
+                    <tr>
+                        <td>当前状态：{$detail.account.login_status}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                上机记录
+            </label>
+            <div class="layui-input-block">
+                <table class="layui-table" style="padding: 0;margin: 0;">
+                    <tbody>
+                    <tr style="background: #f2f2f2;">
+                    <th>电脑编号</th>
+                    <th>消费金额</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>状态</th>
+                    </tr>
+                    {volist name='detail_consume' id='consume_value'}
+                    <tr>
+                        <td>{$consume_value.pc_no}</td>
+                        <td>{$consume_value.amount}</td>
+                        <td>{$consume_value.start_date}</td>
+                        <td>{$consume_value.end_date}</td>
+                        <td>{$consume_value.status}</td>
+                    </tr>
+                    {/volist}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="dataTables_paginate">
+                {$detail_consume->render()}
+            </div>
+        </div>
+
+
+    </form>
+</div>
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+{include file="../../view/comm/footer" /}

@@ -1,0 +1,23 @@
+<div class="layui-side-scroll">
+    <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="side">
+
+        {volist name='menu' id='menu'}
+        <li class="layui-nav-item">
+            <a class="javascript:;" href="javascript:;">
+                <i class="layui-icon" style="top: 3px;">{$menu.parent.icon}</i><cite>{$menu.parent.menu_name}</cite>
+            </a>
+            <dl class="layui-nav-child">
+                {volist name='menu.child' id='child'}
+                <dd class="">
+                    <a href="javascript:;" _href="{$Think.config.domain}{$child.url}">
+                        <cite>{$child.menu_name}</cite>
+                    </a>
+                </dd>
+                {/volist}
+            </dl>
+        </li>
+        {/volist}
+
+        </li>
+    </ul>
+</div>
