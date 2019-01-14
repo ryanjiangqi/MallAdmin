@@ -1,7 +1,0 @@
-.get-image{float: left;width: 100%;margin-top: 5px;}
-.get-image li{float: left;height: 80px;width: 80px;margin-right: 5px;position: relative;border:1px dashed #d0d0d0;}
-.get-image li img{height: 80px;width: 80px;}
-.img-deleted{position: absolute;right: 0px;cursor:hand;cursor:pointer;top: 0px;height: 20px;width: 20px;color: red;font-size: 20px;}
-.img-deleted img{width: 20px;height: 20px;}
-.list-image{height: 40px;width: 40px;}
-.list-image-td{width: 40px;}
