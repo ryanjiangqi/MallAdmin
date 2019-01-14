@@ -1,0 +1,44 @@
+{include file="../../view/comm/header" /}
+<link rel="stylesheet" href="/static/admin/css/checkbox.css" media="all">
+<style>
+    .layui-form-pane .layui-form-label {
+        width: 160px;
+        text-align: left;
+    }
+</style>
+<div class="x-body">
+
+    <form class="layui-form layui-form-pane" action="" lay-filter="example" >
+        <input type="hidden" value="idcard" name="action">
+        <div class="layui-form-item">
+            <div class="layui-form-item">
+                <label for="name" class="layui-form-label"><span class="x-red">* </span>用户名</label>
+                <div class="layui-input-inline item">
+                    <input type="text"
+                           autocomplete="off" class="layui-input" style="background: #f1f1f1;" value="{$detail.user_name}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="name" class="layui-form-label"><span class="x-red">* </span>真实姓名</label>
+                <div class="layui-input-inline item">
+                    <input type="text" name="real_name" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="name" class="layui-form-label"><span class="x-red">* </span>身份证号</label>
+                <div class="layui-input-inline item">
+                    <input type="text" name="id_card" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" lay-filter="add">修改</button>
+        </div>
+    </form>
+</div>
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+{include file="../../view/comm/footer" /}

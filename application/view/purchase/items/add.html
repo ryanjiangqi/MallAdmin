@@ -1,0 +1,71 @@
+{include file="../../view/comm/header" /}
+<link rel="stylesheet" href="/static/admin/css/checkbox.css" media="all">
+<style>
+    .layui-form-item .layui-input-inline{width:280px;}
+</style>
+<div class="x-body">
+    <form action="" method="post" class="layui-form layui-form-pane">
+        <input type='hidden' id='action' name='action' value='add'> 
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">
+                <span class="x-red">* </span>父级类目
+            </label>
+            <div class="layui-input-inline item">
+                <select name="parent_id">
+                    <option value='0'>顶级类目</option>
+                    {volist name='items_list' id='items_list'}
+                    <option value='{$items_list.id}'>{$items_list.name}</option>
+                    {/volist}
+
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">* </span>名称
+            </label>
+            <div class="layui-input-inline item">
+                <input type="text" id="name" name="name" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" placeholder="请输入采购类目名">
+            </div>
+        </div>
+        
+
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                排序
+            </label>
+            <div class="layui-input-inline item">
+                <input type="text" id="sort" name="sort"
+                       autocomplete="off" class="layui-input" value='0'>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">
+                状态
+            </label>
+            <div class="layui-input-inline item">
+                <select name="status">
+                    <option value="发布">发布</option>
+                    <option value="不发布">不发布</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                采购类目简介
+            </label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" id="keyword" name="keyword" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
+        </div>
+    </form>
+</div>
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+{include file="../../view/comm/footer" /}

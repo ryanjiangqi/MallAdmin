@@ -1,0 +1,102 @@
+{include file="../../view/comm/header" /}
+<body>
+<div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a><cite>首页</cite></a>
+            <a><cite>商城</cite></a>
+            <a><cite>商品类目</cite></a>
+        </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon"
+                                                                        style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <form class="layui-form x-center" action="">
+        <div class="layui-form-pane">
+            <div class="layui-form-item">
+                <label class="layui-form-label">顶级类目</label>
+                <div class="layui-input-inline">
+                    <select name="parent">
+                        <option value='0'>请选择类目</option>
+                        {volist name='parent' id='parent'}
+                        <option value="{$parent.id}" {if $parent.id eq $search.parent}selected{/if}>{$parent.items_name}</option>
+                        {/volist}
+                    </select>
+                </div>
+
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-inline">
+                    <select name="status">
+                        <option value="0">请选择</option>
+                        <option value="发布" {if $search.status eq '发布'}selected{/if}>发布</option>
+                        <option value="不发布" {if $search.status eq '不发布'}selected{/if}>不发布</option>
+                    </select>
+                </div>
+
+
+                <div class="layui-input-inline">
+                    <input type="text" name="content" value="{$search.content}" placeholder="请输入类目名称" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:80px">
+                    <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <xblock>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
+        <button class="layui-btn" onclick="full('{:url("mall/product/addItems","","")}')"><i class="layui-icon">&#xe608;</i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：{$list->total()} 条</span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th><input type="checkbox" name="" value=""></th>
+            <th>类目图</th>
+            <th>类目名称</th>
+            <th>父级类目</th>
+            <th>排序</th>
+            <th>状态</th>
+            <th>添加时间</th>
+            <th style="width: 65px;">操作</th>
+        </tr>
+        </thead>
+        <tbody id="x-link">
+
+        {volist name='list' id='data'}
+        <tr>
+            <td><input type="checkbox" value="1" name=""></td>
+            {if $data.image eq ''}
+            <td class="list-image-td"><img src='/static/admin/images/add-img.png' class="list-image"></td>
+            {else}
+            <td class="list-image-td"><img src='{$Think.config.image_src.$data.image}' class="list-image"></td>
+            {/if}
+            <td>{$data.items_name}</td>
+            <td>{$data.parent_name}</td>
+            <td>{$data.sort}</td>
+            <td>{$data.status}</td>
+            <td>{$data.create_on}</td>
+            <td class="td-manage">
+                <a title="编辑" href="javascript:;" onclick="full('{:url("mall/product/itemsedit",['id'=>$data.id],"")}')"
+                   class="ml-5" style="text-decoration:none">
+                    编辑
+                </a>
+                <a title="删除" href="javascript:;"  onclick="deletedRow(this,'{:url("mall/product/deleteditems","","")}',{$data.id});"
+                   style="text-decoration:none">
+                    删除
+                </a>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+
+    <div class="dataTables_paginate">
+        {$list->render()}
+    </div>
+</div>
+
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+{include file="../../view/comm/footer" /}

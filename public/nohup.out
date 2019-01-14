@@ -1,0 +1,39 @@
+Usage: php yourfile <command> [mode]
+Commands: 
+start		Start worker in DEBUG mode.
+		Use mode -d to start in DAEMON mode.
+stop		Stop worker.
+		Use mode -g to stop gracefully.
+restart		Restart workers.
+		Use mode -d to start in DAEMON mode.
+		Use mode -g to stop gracefully.
+reload		Reload codes.
+		Use mode -g to reload gracefully.
+status		Get worker status.
+		Use mode -d to show live status.
+connections	Get worker connections.
+Workerman[toclientsocket.php] start in DEBUG mode
+----------------------- WORKERMAN -----------------------------
+Workerman version:3.5.10          PHP version:5.6.36
+------------------------ WORKERS -------------------------------
+user          worker        listen                    processes status
+root          none          websocket://0.0.0.0:2346   1         [OK] 
+----------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+Workerman[toclientsocket.php] stopping ...
+Workerman[toclientsocket.php] has been stopped
+Usage: php yourfile <command> [mode]
+Commands: 
+start		Start worker in DEBUG mode.
+		Use mode -d to start in DAEMON mode.
+stop		Stop worker.
+		Use mode -g to stop gracefully.
+restart		Restart workers.
+		Use mode -d to start in DAEMON mode.
+		Use mode -g to stop gracefully.
+reload		Reload codes.
+		Use mode -g to reload gracefully.
+status		Get worker status.
+		Use mode -d to show live status.
+connections	Get worker connections.
+11

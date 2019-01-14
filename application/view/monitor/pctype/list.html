@@ -1,0 +1,86 @@
+{include file="../../view/comm/header" /}
+<script src="/static/admin/operation/pcstatus.js" charset="utf-8"></script>
+<style>
+#fonts-used {
+    font-size: 11px;
+    color: red;
+}
+
+#fonts-free {
+    font-size: 11px;
+    color: green;
+}
+
+#fonts-bad {
+    font-size: 11px;
+    color: #000;
+}
+
+#fonts-lock {
+    font-size: 11px;
+    color: blue;
+}
+
+.list-image {
+    width: 30px;
+    height: 30px;
+}
+
+.ml-5 {
+    font-size: 12px;
+}
+
+#action-free {
+    font-size: 12px;
+    color: green;
+}
+</style>
+
+<body>
+    <div class="x-nav">
+        <span class="layui-breadcrumb">
+      <a><cite>首页</cite></a>
+      <a><cite>监控管理</cite></a>
+      <a><cite>区域管理</cite></a>
+    </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);"
+      title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+        <xblock>
+            <button class="layui-btn" onclick="x_admin_show('添加区域','{:url("monitor/Clientpctype/addclientpctype","","")}','500','400')"> <i class="layui-icon">&#xe608;</i>添加区域</button>
+            <span class="x-right" style="line-height:40px">共有数据：{$list->total()} 条</span>
+        </xblock>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th style="width: 80px;">区域名称</th>
+                    <th>计费方式</th>
+                    <th>费用（每小时每台/每小时每个包间）</th>
+                    <th style="width: 200px;">操作</th>
+                </tr>
+            </thead>
+            <tbody id="x-link">
+                {volist name='list' id='data'}
+                <tr>
+                    <td data-id='{$data.id}'>{$data.type_name}</td>
+                    <td>
+                        {if $data.billing_methods eq '1'}
+                        单台客户机
+                        {/if}
+                        {if $data.billing_methods eq '2'}
+                        包厢
+                        {/if}
+                    </td>
+                    <td>{$data.cost}元</td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+        <div class="dataTables_paginate">
+            {$list->render()}
+        </div>
+    </div>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+    {include file="../../view/comm/footer" /}
