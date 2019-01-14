@@ -195,4 +195,20 @@ class Product extends Base
         print_r($html);
         echo $html['price'];
     }
+
+    public function skuimages(Request $request)
+    {
+        $param = $request->param();
+        if (!empty($param['action']) && $param['action'] == 'skuimageupdate') {
+            ProductSerivce::instance()->updateSkuImage($param);
+            $this->layMsg('修改成功', 6);
+            exit;
+        }
+        if ($param['id']) {
+            $skuImages = ProductSerivce::instance()->selectSkuImages($param['id']);
+            $this->assign('sku', $skuImages);
+            return view($this->viewPath('product/skuimage'));
+        }
+
+    }
 }

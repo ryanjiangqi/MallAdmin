@@ -89,7 +89,8 @@ class Base extends Controller
     public function uploadimage()
     {
         $result = BaseSerivce::uploadImage($_FILES);
-        echo json_encode(array('code' => 200, 'src' => '/static/uploadfile/' . $result));
+        //echo json_encode(array('code' => 200, 'src' => '/static/uploadfile/' . $result));
+        echo json_encode(array('code' => 200, 'src' => $result));
     }
 
     public function uploadimageview(Request $request)

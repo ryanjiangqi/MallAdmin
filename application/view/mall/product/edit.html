@@ -191,7 +191,7 @@
             <ul id="get-image" class="get-image">
                 {if $detail.img_array neq '' }
                     {volist name='detail.img_array' id='img'}
-                    <li><img src="{$img}"><span class="img-deleted" onclick="deletedImg(this);">
+                    <li><img src="{$Think.config.image_src.$img}"><span class="img-deleted" onclick="deletedImg(this);">
                         <img src="/static/admin/images/delete.png" style="height: 20px;width: 20px;"></span>
                         <input name="image[]" value="{$img}" type="hidden">
                     </li>

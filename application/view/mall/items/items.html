@@ -70,7 +70,7 @@
             {if $data.image eq ''}
             <td class="list-image-td"><img src='/static/admin/images/add-img.png' class="list-image"></td>
             {else}
-            <td class="list-image-td"><img src='{$data.image}' class="list-image"></td>
+            <td class="list-image-td"><img src='{$Think.config.image_src.$data.image}' class="list-image"></td>
             {/if}
             <td>{$data.items_name}</td>
             <td>{$data.parent_name}</td>

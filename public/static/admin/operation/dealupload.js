@@ -29,9 +29,9 @@ $.extend({
             $("li.selectimges").each(function () {
                 if ($(this).attr('att') == 1) {
                     var img = $(this).attr('value');
-                    html = html + '<li><img src="/static/uploadfile/' + img + '"><span class="img-deleted" onclick="deletedImg(this);">';
+                    html = html + '<li><img src="/static/uploadfile/100x100/' + img + '"><span class="img-deleted" onclick="deletedImg(this);">';
                     html = html + '<img src="/static/admin/images/delete.png" style="height: 20px;width: 20px;"></span>';
-                    html = html + '<input type="hidden" name="' + filenameNew + '" value="/static/uploadfile/' + img + '"></li>';
+                    html = html + '<input type="hidden" name="' + filenameNew + '" value="' + img + '"></li>';
                     i = i + 1;
                 }
             });
@@ -40,7 +40,7 @@ $.extend({
             $("section.image-section").each(function () {
                 html = html + '<li><img src="' + $(this).children('img').attr('src') + '"><span class="img-deleted" onclick="deletedImg(this);">';
                 html = html + '<img src="/static/admin/images/delete.png" style="height: 20px;width: 20px;"></span>';
-                html = html + '<input type="hidden" name="' + filenameNew + '" value="' + $(this).children('img').attr('src') + '"></li>';
+                html = html + '<input type="hidden" name="' + filenameNew + '" value="' + $(this).children('input').attr('value') + '"></li>';
                 i = i + 1;
             });
         }

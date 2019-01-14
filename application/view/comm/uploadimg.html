@@ -16,7 +16,7 @@
             <div class="layui-tab-item layui-show">
                 <ul class='se-img'>
                     {volist name='list' id='data'}
-                    <li onclick="$.selectimage(this);" att="0" class="selectimges" value="{$data.filename}"><img src='/static/uploadfile/{$data.filename}'></li>
+                    <li onclick="$.selectimage(this);" att="0" class="selectimges" value="{$data.filename}"><img src='/static/uploadfile/100x100/{$data.filename}'></li>
                     {/volist}
                 </ul>
                 <div class="dataTables_paginate">

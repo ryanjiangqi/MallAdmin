@@ -163,7 +163,7 @@
                     imageSection.removeClass("image-loading");
                     imageShow.removeClass("image-opcity");
 
-                    imageShow.attr('src', json.src);
+                    imageShow.attr('src', '/static/uploadfile/100x100/'+json.src);
                     imageShow.siblings('input').val(json.src);
 
                     // 将上传状态设为非上传中

@@ -14,7 +14,8 @@
 
 namespace upload;
 
-class Uploadimage {
+class Uploadimage
+{
 
     //put your code here
     public $parm = array();
@@ -23,26 +24,26 @@ class Uploadimage {
     public $maxsize = 2097152;       //上传图片大小
     public $mkdir_mode = 0777;           //上传图片权限
     public $versions = array(//生成缩略图属性
-        '50x50' => array(
-            'max_width' => 50,
-            'max_height' => 50,
-            'quality' => 100
-        ),
+//        '50x50' => array(
+//            'max_width' => 50,
+//            'max_height' => 50,
+//            'quality' => 100
+//        ),
         '100x100' => array(
             'max_width' => 100,
             'max_height' => 100,
             'quality' => 100
         ),
-        '150x150' => array(
-            'max_width' => 150,
-            'max_height' => 150,
-            'quality' => 100
-        ),
-        '200x200' => array(
-            'max_width' => 200,
-            'max_height' => 200,
-            'quality' => 100
-        ),
+//        '150x150' => array(
+//            'max_width' => 150,
+//            'max_height' => 150,
+//            'quality' => 100
+//        ),
+//        '200x200' => array(
+//            'max_width' => 200,
+//            'max_height' => 200,
+//            'quality' => 100
+//        ),
         '400x400' => array(
             'max_width' => 400,
             'max_height' => 400,
@@ -55,7 +56,8 @@ class Uploadimage {
         )
     );
 
-    public function __construct($array) {
+    public function __construct($array)
+    {
         (isset($array['savepath']) && $array['savepath'] != "") ? $this->parm['savepath'] = $array['savepath'] : $this->parm['savepath'] = $this->savepath;
         (isset($array['filetype']) && $array['filetype'] != "") ? $this->parm['filetype'] = $array['filetype'] : $this->parm['filetype'] = $this->filetype;
         (isset($array['maxsize']) && $array['maxsize'] != "") ? $this->parm['maxsize'] = $array['maxsize'] : $this->parm['maxsize'] = $this->maxsize;
@@ -67,7 +69,8 @@ class Uploadimage {
      * 如果上传出错 返回错误，成功返回上传后的图片name
      * @return string
      */
-    public function uploadImage() {
+    public function uploadImage()
+    {
         //判断图片格式是否能上传
         $fileParts = pathinfo($this->parm['post']['file']['name']);
         if (!in_array(strtolower($fileParts['extension']), $this->parm['filetype'])) {
@@ -91,11 +94,12 @@ class Uploadimage {
     }
 
     /**
-     * @param 图片的资源目录         $targetFile 
-     * @param 图片的名称                $file_name
-     * @param 图片开始的绝对路径  $targetPath
+     * @param 图片的资源目录 $targetFile
+     * @param 图片的名称 $file_name
+     * @param 图片开始的绝对路径 $targetPath
      */
-    public function scaledimages($targetFile, $fileName, $targetPath) {
+    public function scaledimages($targetFile, $fileName, $targetPath)
+    {
         if (is_array($this->parm['versions']) && count($this->parm['versions']) != 0) {
             foreach ($this->parm['versions'] as $version => $options) {
                 $this->createscaledimage($targetFile, $fileName, $targetPath . '/' . $version . '/', $options);
@@ -104,13 +108,14 @@ class Uploadimage {
     }
 
     /**
-     * @param 图片的资源目录      $targetFile
-     * @param 图片的名称             $fileName
-     * @param 生成缩略图的路劲  $newfilePath
-     * @param 生成缩略图的属性  $options
+     * @param 图片的资源目录 $targetFile
+     * @param 图片的名称 $fileName
+     * @param 生成缩略图的路劲 $newfilePath
+     * @param 生成缩略图的属性 $options
      * @return boolean
      */
-    public function createscaledimage($targetFile, $fileName, $newfilePath, $options) {
+    public function createscaledimage($targetFile, $fileName, $newfilePath, $options)
+    {
         if ($newfilePath != '') {
             if (!is_dir($newfilePath)) {
                 mkdir($newfilePath, $this->mkdir_mode, true);

@@ -84,7 +84,7 @@
         <div class="layui-form-item">
             <ul id="get-image" class="get-image">
                 {if $detail.image neq ''}
-                <li><img src="{$detail.image}"><span class="img-deleted" onclick="deletedImg(this);">
+                <li><img src="{$Think.config.image_src.$detail.image}"><span class="img-deleted" onclick="deletedImg(this);">
                     <img src="/static/admin/images/delete.png" style="height: 20px;width: 20px;"></span>
                     <input name="image" value="{$detail.image}" type="hidden">
                 </li>

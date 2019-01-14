@@ -182,5 +182,44 @@ class ProductSerivce extends BaseSerivce
         return PAttribute::selectAttributeFromItems($data, $productId);
     }
 
+    public function selectSkuImages($productId)
+    {
+        $data = ProductSku::where(['product_id' => $productId])->select()->toArray();
+        if (!empty($data)) {
+            foreach ($data as $key => $vals) {
+                $where['id'] = array('in', $vals['attribute_id']);//cid在这个数组中，
+                $val = PAttribute::where($where)->select()->toArray();
+                $string = "";
+                $imageArray = [];
+                if (!empty($val)) {
+                    foreach ($val as $vaues) {
+                        $string .= $vaues['attribute_value'] . ',';
+                    }
+                }
+                if ($vals['image']) {
+                    $imageArray = explode(',', $vals['image']);
+                }
+                $data[$key]['string'] = substr($string, 0, strlen($string) - 1);
+                $data[$key]['imagelist'] = $imageArray;
+
+            }
+        }
+        return $data;
+    }
+
+    public function updateSkuImage($param)
+    {
+        if ($param['id']) {
+            foreach ($param as $key => $item) {
+                $keyArray = explode('-', $key);
+                if (!empty($keyArray[0]) && $keyArray[0] == 'image') {
+                    $dataEdit = implode(',', $item);
+                    ProductSku::where(['id' => $keyArray[1]])->update(['image' => $dataEdit ?? '']);
+                }
+            }
+        }
+        return true;
+    }
+
 
 }
