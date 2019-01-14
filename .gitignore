@@ -2,10 +2,8 @@
 composer.lock
 *.log
 /nbproject/private/
-/public/static/uploadfile/*.jpg
-/public/static/uploadfile/*.jpeg
-/public/static/uploadfile/*.gif
-/public/static/uploadfile/*.png
+/public/static/uploadfile/*
+
 
 
 
