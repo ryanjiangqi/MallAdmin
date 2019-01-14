@@ -1,2 +1,8 @@
 *
 !.gitignore
+!/50x50/.gitignore
+!/100x100/.gitignore
+!/150x150/.gitignore
+!/200x200/.gitignore
+!/400x400/.gitignore
+!/800x800/.gitignore
