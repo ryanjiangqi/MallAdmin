@@ -20,7 +20,7 @@ class Login extends controller
 
     public function loginSuccess()
     {
-        $this->assign('url', Url::build('home/index/index', ''));
+        $this->assign('url', Url::build('/', ''));
         echo $this->fetch(Config::get('viewpath') . '/comm/reload');
     }
 
