@@ -3,3 +3,4 @@ composer.lock
 *.log
 /nbproject/private/
 /public/static/uploadfile/*
+!/public/static/uploadfile/
