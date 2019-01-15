@@ -2,7 +2,6 @@
 composer.lock
 *.log
 /nbproject/private/
-/config/database.php
 
 
 
