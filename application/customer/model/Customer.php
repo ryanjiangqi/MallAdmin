@@ -33,10 +33,7 @@ class Customer extends Model
             $list = self::where($where)
                 ->paginate($paginate, false, $searchParam);
         }
-        foreach ($list as $key => $value) {
-            $account = CustomerAccount::where(['customer_id' => $value['id']])->find()->toArray();
-            $list[$key]['login_status'] = $account['login_status'];
-        }
+
         return $list;
     }
 

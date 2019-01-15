@@ -26,12 +26,12 @@ class OrdersSerivce extends BaseSerivce
 
     public function updateStatus($data)
     {
-        return Orders::where('id', $data['id'])->update(['is_deal' => $data['is_deal']]);
+        return Orders::where('id', $data['id'])->update(['payment_status' => $data['status']]);
     }
 
     public function updateOrderStatus($data)
     {
-        return Orders::where('id', $data['id'])->update(['order_status' => $data['status']]);
+        return Orders::where('id', $data['id'])->update(['orders_status' => $data['status']]);
     }
 
     public function orderDetail($data)

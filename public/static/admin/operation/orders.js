@@ -1,11 +1,5 @@
-function changeDeal(url, msg, id) {
-    if (msg == '未处理') {
-        status = '已处理';
-    }
-    if (msg == '已处理') {
-        status = '未处理';
-    }
-    layer.confirm('确认要更新为' + status + '吗？', function (index) {
+function changeDeal(url, id) {
+    layer.confirm('确认要更新吗？', function (index) {
         $.ajax({
             url: url,
             type: 'Post',
@@ -13,7 +7,8 @@ function changeDeal(url, msg, id) {
             beforeSend: function () {
             },
             data: {
-                id: id, is_deal: status
+                id: id,
+                status:$("#changepayment").val()
             },
             success: function (data) {
                 layer.msg('更新成功!', {icon: 1, time: 1000}, function () {
@@ -24,8 +19,8 @@ function changeDeal(url, msg, id) {
     });
 }
 
-function changeStatus(url, msg, id) {
-    layer.confirm('确认要更新为' + msg + '吗？', function (index) {
+function changeStatus(url,id) {
+    layer.confirm('确认要更新吗？', function (index) {
         $.ajax({
             url: url,
             type: 'Post',
@@ -33,7 +28,8 @@ function changeStatus(url, msg, id) {
             beforeSend: function () {
             },
             data: {
-                id: id, status: msg
+                id: id,
+                status:$("#changeorderstatus").val()
             },
             success: function (data) {
                 layer.msg('更新成功!', {icon: 1, time: 1000}, function () {

@@ -26,7 +26,7 @@ class Orders extends Base
     public function orderslist(Request $request)
     {
         $searchParam = $request->param();
-        $searchParam = MyHelper::dealSearchParam(['is_deal', 'order_status', 'content'], $searchParam);
+        $searchParam = MyHelper::dealSearchParam(['payment_status', 'orders_status', 'content'], $searchParam);
         $list = OrdersSerivce::instance()->ordersList($searchParam);
         $this->assign('list', $list);
         $this->assign('search', $searchParam);

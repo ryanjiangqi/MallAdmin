@@ -18,14 +18,14 @@ class Orders extends Model
     {
         $searchParam = [];
         $where['is_deleted'] = 0;
-        if (!empty($param['is_deal'])) {
-            $where['is_deal'] = $param['is_deal'];
-            $searchParam['query']['is_deal'] = $param['is_deal'];
+        if (!empty($param['orders_status'])) {
+            $where['orders_status'] = $param['orders_status'];
+            $searchParam['query']['orders_status'] = $param['orders_status'];
         }
 
-        if (!empty($param['order_status'])) {
-            $where['order_status'] = $param['order_status'];
-            $searchParam['query']['order_status'] = $param['order_status'];
+        if (!empty($param['payment_status'])) {
+            $where['payment_status'] = $param['payment_status'];
+            $searchParam['query']['payment_status'] = $param['payment_status'];
         }
         if (!empty($param['content'])) {
             $searchParam['query']['content'] = $param['content'];

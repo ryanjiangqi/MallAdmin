@@ -14,24 +14,25 @@
     <form class="layui-form x-center" action="">
         <div class="layui-form-pane">
             <div class="layui-form-item">
-                <label class="layui-form-label">处理状态</label>
+                <label class="layui-form-label">订单状态</label>
                 <div class="layui-input-inline" style="width: 120px;">
-                    <select name="is_deal">
+                    <select name="orders_status">
                         <option value="0">请选择</option>
-                        <option value="未处理" {if $search.is_deal eq '未处理'}selected{/if}>未处理</option>
-                        <option value="已处理" {if $search.is_deal eq '已处理'}selected{/if}>已处理</option>
+                        <option value="订单完成" {if $search.orders_status eq '订单完成'}selected{/if}>订单完成</option>
+                        <option value="订单取消" {if $search.orders_status eq '订单取消'}selected{/if}>订单取消</option>
+                        <option value="订单处理中" {if $search.orders_status eq '订单处理中'}selected{/if}>订单处理中</option>
+
+
                     </select>
                 </div>
 
-                <label class="layui-form-label">订单状态</label>
+                <label class="layui-form-label">支付状态</label>
                 <div class="layui-input-inline" style="width: 120px;">
-                    <select name="order_status">
+                    <select name="payment_status">
                         <option value="0">请选择</option>
-                        <option value="已支付"  {if $search.order_status eq '已支付'}selected{/if}>已支付</option>
-                        <option value="未支付"  {if $search.order_status eq '未支付'}selected{/if}>未支付</option>
-                        <option value="订单完成" {if $search.order_status eq '订单完成'}selected{/if}>订单完成</option>
-                        <option value="订单取消" {if $search.order_status eq '订单取消'}selected{/if}>订单取消</option>
-                        <option value="订单处理中" {if $search.order_status eq '订单处理中'}selected{/if}>订单处理中</option>
+                        <option value="已支付"  {if $search.payment_status eq '已支付'}selected{/if}>已支付</option>
+                        <option value="未支付"  {if $search.payment_status eq '未支付'}selected{/if}>未支付</option>
+
                     </select>
                 </div>
 
@@ -60,11 +61,11 @@
             <th>下单用户名</th>
             <th>下单用户电话</th>
             <th>订单状态</th>
+            <th>支付状态</th>
             <th style="width: 140px;">下单时间</th>
             <th>订单金额金额</th>
             <th>实际支付金额</th>
-            <th>是否处理</th>
-            <th style="width: 100px;">操作</th>
+            <th style="width: 60px;">操作</th>
         </tr>
         </thead>
         <tbody id="x-link">
@@ -79,31 +80,35 @@
             </td>
             <td>{$data.nick_name}</td>
             <td>{$data.mobile}</td>
-            <td>{$data.order_status}</td>
-            <td>{$data.create_date}</td>
-            <td>{$data.amount}</td>
-            <td>{$data.pay_amount}</td>
-            <td title="编辑处理状态" onclick="changeDeal('{:url("mall/orders/updatestatus","","")}','{$data.is_deal}','{$data.id}');" style="cursor: hand;cursor: pointer;">
-            {if $data.is_deal eq '已处理'}
-            <span style="color:green;">{$data.is_deal}<i class="layui-icon" > &#xe66c;</i></span>
-            {else}
-            <span style="color:red;">{$data.is_deal}<i class="layui-icon" style="color:red;"> &#xe66c;</i></span>
-            {/if}
 
+
+
+            <td>
+                <select id="changeorderstatus" style="padding: 5px;" onchange="changeStatus('{:url("mall/orders/updateorderstatus","","")}','{$data.id}');">
+                    <option value="订单完成" {if $data.orders_status eq '订单完成'}selected{/if}>订单完成</option>
+                    <option value="订单取消" {if $data.orders_status eq '订单取消'}selected{/if}>订单取消</option>
+                    <option value="订单处理中" {if $data.orders_status eq '订单处理中'}selected{/if}>订单处理中</option>
+                </select>
             </td>
-            <td class="td-manage" style="width: 160px;">
+            <td>
+                <select id="changepayment" style="padding: 5px;" onchange="changeDeal('{:url("mall/orders/updatestatus","","")}','{$data.id}');">
+                    <option value="已支付"  {if $data.payment_status eq '已支付'}selected{/if}>已支付</option>
+                    <option value="未支付"  {if $data.payment_status eq '未支付'}selected{/if}>未支付</option>
+
+                </select>
+            </td>
+
+
+
+            <td>{$data.created_at}</td>
+            <td>{$data.orders_amount}</td>
+            <td>{$data.payment_amount}</td>
+            </td>
+            <td class="td-manage" style="width: 60px;">
                 <a title="查看" href="javascript:;" onclick="x_admin_show('查看订单信息','{:url("mall/orders/orderdetail",['id'=>$data.id],"")}','','');"
                    class="ml-5" style="text-decoration:none">
                     查看
                 </a>&nbsp;
-                <a title="编辑" href="javascript:;" onclick="changeStatus('{:url("mall/orders/updateorderstatus","","")}','订单完成','{$data.id}');"
-                   class="ml-5" style="text-decoration:none">
-                    订单完成&nbsp;
-                </a>
-                <a title="编辑" href="javascript:;" onclick="changeStatus('{:url("mall/orders/updateorderstatus","","")}','订单取消','{$data.id}');"
-                   class="ml-5" style="text-decoration:none">
-                    订单取消
-                </a>
             </td>
         </tr>
         {/volist}

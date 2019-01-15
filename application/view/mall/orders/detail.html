@@ -17,22 +17,30 @@
                     <tbody>
                     <tr>
                         <td>订单号：{$detail.orders_sn}</td>
-                        <td>下单时间：{$detail.create_date}</td>
+                        <td>下单时间：{$detail.created_at}</td>
 
                     </tr>
                     <tr>
-                        <td>订单处理状态：{$detail.is_deal}</td>
-                        <td>订单状态：{$detail.order_status}</td>
+                        <td>订单金额：{$detail.orders_amount}</td>
+                        <td>运费：{$detail.shipping_fee}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td>折扣金额：{$detail.discount_fee}</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>订单状态：{$detail.orders_status}</td>
+                        <td>支付状态：{$detail.payment_status}</td>
 
                     </tr>
                     <tr>
-                        <td>支付途径：{$detail.pay_type}</td>
-                        <td>支付金额：{$detail.pay_amount}</td>
+                        <td>支付时间：-</td>
+                        <td>支付金额：{$detail.payment_amount}</td>
 
-                    </tr>
-                    <tr>
-                        <td>支付时间：{$detail.pay_date}</td>
-                        <td></td>
                     </tr>
                     </tbody>
                 </table>
@@ -50,11 +58,15 @@
                         <td>下单人用户名：{$detail.user_name}</td>
                     </tr>
                     <tr>
-                        <td>下单人电话：{$detail.mobile}</td>
+                        <td>收货人姓名：{$detail.nick_name}</td>
                     </tr>
                     <tr>
-                        <td>下单人昵称：{$detail.nick_name}</td>
+                        <td>收货人电话：{$detail.mobile}</td>.
                     </tr>
+                    <tr>
+                        <td>收货人详细地址：{$detail.province}-{$detail.city}-{$detail.area}-{$detail.detail_address}</td>
+                    </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -67,11 +79,17 @@
             <div class="layui-input-block">
                 <table class="layui-table" style="padding: 0;margin: 0;">
                     <tbody>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>实际价格</th>
+                        <th>折后价格</th>
+                        <th>数量</th>
+                    </tr>
                     {volist name='$detail.product' id='product'}
                     <tr>
                         <td>{$product.product_name}</td>
-                        <td>{$product.price}</td>
                         <td>{$product.real_price}</td>
+                        <td>{$product.discount_price}</td>
                         <td>{$product.num}</td>
                     </tr>
                     {/volist}
