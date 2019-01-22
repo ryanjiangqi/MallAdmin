@@ -116,12 +116,11 @@ class Product extends Model
 
         foreach ($sku as $key => $value) {
             foreach ($data['sku'] as $k => $v) {
-                if($value['sku']==$v){
-                    $data['sku_image'][$k]=$value['image'];
+                if ($value['sku'] == $v) {
+                    $data['sku_image'][$k] = $value['image'];
                 }
             }
         }
-
         self::where(['id' => $data['id']])->update([
             'name' => !empty($data['name']) ? $data['name'] : '',
             'plu' => !empty($data['plu']) ? $data['plu'] : date('YmdH') . MyHelper::uuid(),
@@ -158,6 +157,7 @@ class Product extends Model
                 ProductSku::create([
                     'product_id' => $data['id'],
                     'sku' => $valt,
+                    'image' => $data['sku_image'][$keyt],
                     'attribute_id' => $data['attribute_list_id'][$keyt],
                     'price' => $data['price'][$keyt],
                     'is_deleted' => 0,
