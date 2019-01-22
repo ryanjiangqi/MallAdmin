@@ -111,6 +111,17 @@ class Product extends Model
             $imageList = implode(',', $data['image']);
             $coverImage = $data['image'][0];
         }
+        //获取已经存在sku的图片
+        $sku = ProductSku::where(['product_id' => $data['id']])->select()->toArray();
+
+        foreach ($sku as $key => $value) {
+            foreach ($data['sku'] as $k => $v) {
+                if($value['sku']==$v){
+                    $data['sku_image'][$k]=$value['image'];
+                }
+            }
+        }
+        
         self::where(['id' => $data['id']])->update([
             'name' => !empty($data['name']) ? $data['name'] : '',
             'plu' => !empty($data['plu']) ? $data['plu'] : date('YmdH') . MyHelper::uuid(),
