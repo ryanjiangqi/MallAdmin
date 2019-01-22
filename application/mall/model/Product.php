@@ -121,7 +121,7 @@ class Product extends Model
                 }
             }
         }
-        
+
         self::where(['id' => $data['id']])->update([
             'name' => !empty($data['name']) ? $data['name'] : '',
             'plu' => !empty($data['plu']) ? $data['plu'] : date('YmdH') . MyHelper::uuid(),
