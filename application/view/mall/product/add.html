@@ -196,6 +196,10 @@
                 <textarea placeholder="请输入内容" id="keyword" name="keyword" class="layui-textarea"></textarea>
             </div>
         </div>
+
+        <textarea id="demo" style="display: none;" name="description"></textarea>
+
+
         <div class="layui-form-item">
             <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
         </div>
@@ -204,4 +208,16 @@
 <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
 <script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
 <script src="/static/admin/operation/product.js" charset="utf-8"></script>
+<script>
+    layui.use('layedit', function(){
+        var layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: '{:url("base/base/uploadimageedit","","")}' //接口url
+                ,type: 'post' //默认post
+            }
+        });
+        layedit.build('demo'); //建立编辑器
+    });
+</script>
 {include file="../../view/comm/footer" /}

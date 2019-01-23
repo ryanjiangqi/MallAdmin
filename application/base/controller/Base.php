@@ -103,4 +103,19 @@ class Base extends Controller
         $this->assign('name', urldecode($param['name']));
         return view(Config::get('viewpath') . 'comm/uploadimg');
     }
+
+    public function uploadimageedit()
+    {
+        $result = BaseSerivce::uploadImage($_FILES);
+        //echo json_encode(array('code' => 200, 'src' => '/static/uploadfile/' . $result));
+        $data = [
+            'code' => '0',
+            'msg' => 'success',
+            'data' => [
+                'src' => '/static/uploadfile/' . $result,
+                'title' => $result,
+            ]
+        ];
+        echo json_encode($data);
+    }
 }
