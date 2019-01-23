@@ -181,10 +181,19 @@
             <div class="layui-btn" style='margin-left: 10px;' onclick="upload_image('{:url("base/base/uploadimageview","parentid=get-image&num=6&name=image","")}');"><i class="layui-icon">&#xe608;</i>添加图片
         </div>
         <span style="color: #999;font-size: 12px;">至少上传一张,最大上传6张</span>
-    </div>
+        </div>
 
         <div class="layui-form-item">
-            <ul id="get-image" class="get-image">
+            <label for="name" class="layui-form-label"><span class="x-red">* </span>产品首页图</label>
+            <div class="layui-input-inline item" style="width: 300px;">
+                <div class="layui-btn" style='margin-left: 10px;' onclick="upload_image('{:url("base/base/uploadimageview","parentid=get-index-image&num=1&name=index_image","")}');"><i class="layui-icon">&#xe608;</i>添加图片
+            </div>
+            <span style="color: #999;font-size: 12px;">支持上传一张图片</span>
+        </div>
+
+
+        <div class="layui-form-item">
+            <ul id="get-index-image" class="get-image">
             </ul>
         </div>
 

@@ -38,6 +38,7 @@ class Product extends Model
             'create_on' => date('Y-m-d H:i:s'),
             'cover_image' => !empty($coverImage) ? $coverImage : '',
             'description'=>!empty($data['description']) ? $data['description'] : '',
+            'index_image'=>!empty($data['index_image']) ? $data['index_image'] : '',
         ]);
         //$productId->id
         if (!empty($data['ex_attribute_id'])) {
@@ -138,6 +139,7 @@ class Product extends Model
             'is_new' => !empty($data['is_new']) ? $data['is_new'] : '',
             'cover_image' => !empty($coverImage) ? $coverImage : '',
             'description' => !empty($data['description']) ? $data['description'] : '',
+            'index_image'=>!empty($data['index_image']) ? $data['index_image'] : '',
         ]);
         ProductExattribute::destroy(['product_id' => $data['id']]);
         ProductSku::destroy(['product_id' => $data['id']]);
