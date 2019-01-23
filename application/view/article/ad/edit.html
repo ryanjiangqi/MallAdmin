@@ -1,0 +1,122 @@
+{include file="../../view/comm/header" /}
+
+<style>
+    .layui-form-item .layui-input-inline {
+        width: 580px;
+    }
+
+    .layui-form-pane .layui-form-label {
+        width: 200px;
+    }
+</style>
+<div class="x-body">
+    <form action="" method="post" class="layui-form layui-form-pane">
+        <input type='hidden' id='action' name='action' value='edit'>
+
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">* </span>名称
+            </label>
+            <div class="layui-input-inline item">
+                <input type="text" id="title" name="title" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" placeholder="请输入名称" value="{$detail.title}" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">
+                <span class="x-red">* </span>类型
+            </label>
+            <div class="layui-input-inline item">
+                <select name="type">
+                    <option value="首页banner图" {if $detail.type eq '首页banner图'}select{/if} >首页banner图</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                链接地址
+            </label>
+            <div class="layui-input-inline item">
+                <input type="text" id="url" name="url"
+                       autocomplete="off" class="layui-input" placeholder="链接地址" value="{$detail.url}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                排序
+            </label>
+            <div class="layui-input-inline item">
+                <input type="text" id="sort" name="sort"
+                       autocomplete="off" class="layui-input" placeholder="排序"  value="{$detail.sort}">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">
+                <span class="x-red">* </span>状态
+            </label>
+            <div class="layui-input-inline item">
+                <select name="status">
+                    <option value="上架"  {if $detail.status eq '上架'}select{/if} >上架</option>
+                    <option value="下架"  {if $detail.status eq '下架'}select{/if} >下架</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label"><span class="x-red">* </span>图片</label>
+            <div class="layui-input-inline item" style="width: 300px;">
+                <div class="layui-btn" style='margin-left: 10px;' onclick="upload_image('{:url("base/base/uploadimageview","parentid=get-image&num=1&name=image","")}');"><i class="layui-icon">&#xe608;</i>添加图片
+            </div>
+            <span style="color: #999;font-size: 12px;">至少上传一张,最大上传1张</span>
+        </div>
+
+        <div class="layui-form-item">
+            <ul id="get-image" class="get-image">
+            </ul>
+        </div>
+
+        <div class="layui-form-item">
+            <ul id="get-image" class="get-image">
+                {if $detail.image neq '' }
+                <li><img src="{$Think.config.image_src.$detail.image}"><span class="img-deleted" onclick="deletedImg(this);">
+                        <img src="/static/admin/images/delete.png" style="height: 20px;width: 20px;"></span>
+                    <input name="image" value="{$detail.image}" type="hidden">
+                </li>
+                {/if}
+            </ul>
+        </div>
+
+
+
+
+        <div class="layui-form-item layui-form-text" style="padding-top: 5px;">
+            <label for="desc" class="layui-form-label">
+                简介
+            </label>
+            <div class="layui-input-block">
+                <textarea placeholder="输入小于600个简介" id="note" name="keyword" class="layui-textarea">{$detail.keyword}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
+        </div>
+    </form>
+</div>
+<script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+{include file="../../view/comm/address" /}
+<script type="text/javascript">
+    pca.init('select[name=province]', 'select[name=city]', 'select[name=district]');
+    //pca.init('select[name=P1]', 'select[name=C1]', 'select[name=A1]', '江西', '吉安', '泰和县');
+</script>
+
+
+{include file="../../view/comm/footer" /}

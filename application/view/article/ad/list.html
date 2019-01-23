@@ -1,0 +1,58 @@
+{include file="../../view/comm/header" /}
+<body>
+    <div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a><cite>首页</cite></a>
+            <a><cite>文章管理</cite></a>
+            <a><cite>广告</cite></a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+
+        <xblock>
+            <button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe640;</i>批量删除</button>
+            <button class="layui-btn" onclick="full('{:url("article/ad/addbanner","","")}')"><i class="layui-icon">&#xe608;</i>添加</button>
+        </xblock>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>图片</th>
+                    <th>名称</th>
+                    <th>url</th>
+                    <th>创建时间</th>
+                    <th>当前状态</th>
+                    <th style="width: 150px;">操作</th>
+                </tr>
+            </thead>
+            <tbody id="x-link">
+
+                {volist name='list' id='data'}
+                <tr>
+                    {if $data.image eq ''}
+                    <td class="list-image-td"><img src='/static/admin/images/add-img.png' class="list-image"></td>
+                    {else}
+                    <td class="list-image-td"><img src='/static/uploadfile/100x100/{$data.image}' class="list-image"></td>
+                    {/if}
+                    <td>{$data.title}</td>
+                    <td>{$data.url}</td>
+                    <td>{$data.created_at}</td>
+                    <td>{$data.status}</td>
+                    <td class="td-manage">
+                        <a title="编辑" href="javascript:;" style="color: #1AA094;" onclick="full('{:url("article/ad/editbanner",['id'=>$data.id],"")}')"
+                        class="ml-5" style="text-decoration:none">
+                        编辑
+                        </a>
+
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+    {include file="../../view/comm/footer" /}
