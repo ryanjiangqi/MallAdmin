@@ -112,7 +112,7 @@ class Base extends Controller
             'code' => '0',
             'msg' => 'success',
             'data' => [
-                'src' => '/static/uploadfile/' . $result,
+                'src' => $_SERVER['HTTP_HOST'].'/static/uploadfile/' . $result,
                 'title' => $result,
             ]
         ];
